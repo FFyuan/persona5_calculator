@@ -39,6 +39,7 @@ function translateWord(originWord: string) {
 function translatePersona(persona: PersonaData) : PersonaData {
     let newPersona = angular.copy(persona);
     newPersona.arcana = translateWord(persona.arcana);
+    newPersona.translatedName = translateWord(persona.name);
     return newPersona;
 }
 

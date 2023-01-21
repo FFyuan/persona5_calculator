@@ -6,6 +6,7 @@ interface PersonaMap {
 
 interface PersonaData {
     name?: string; // only for when converted to list
+    translatedName?: string;
     arcana: string;
     level: number;
     stats: number[];

@@ -36,7 +36,7 @@
     <tr ng:repeat="persona in translatedPersonalList | orderBy:sortFunc:sortReverse | filter:filterStr">
         <td>{{persona.level}}</td>
         <td class="left-border">
-            <a class="persona-name" href='#/persona/{{persona.name}}'>{{persona.name}}</a>
+            <a class="persona-name" href='#/persona/{{persona.name}}'>{{persona.translatedName}}</a>
             <span class="dlc-label" ng-if="persona.dlc">DLC</span>
         </td>
         <td class="left-border">{{persona.arcana}}</td>
