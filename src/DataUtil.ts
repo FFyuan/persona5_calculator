@@ -1,7 +1,7 @@
 ///<reference path="../data/Data5.ts"/>
 ///<reference path="../data/PersonaData.ts"/>
 ///<reference path="../data/SkillData.ts"/>
-
+///<reference path="../data/Translation.ts"/>
 /**
  * Created by Chin on 08-Apr-17.
  */
@@ -27,6 +27,27 @@ function isDlcPersonaOwned(dlcPersona: string): boolean {
     if (!localStorage["dlcPersona"]) return false;
 
     return JSON.parse(localStorage["dlcPersona"])[dlcPersona] === true;
+}
+
+function translateWord(originWord: string) {
+    if (originWord in translationMap) {
+        return translationMap[originWord];
+    }
+    return originWord;
+}
+
+function translatePersona(persona: PersonaData) : PersonaData {
+    let newPersona = angular.copy(persona);
+    newPersona.arcana = translateWord(persona.arcana);
+    return newPersona;
+}
+
+function translatePersonas(personas: PersonaData[]) : PersonaData[] {
+    let arr: PersonaData[] = [];
+    for (const persona of personas) {
+       arr.push(translatePersona(persona)); 
+    }
+    return arr;
 }
 
 /**

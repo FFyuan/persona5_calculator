@@ -1,6 +1,7 @@
 ///<reference path="../data/Data5.ts"/>
 ///<reference path="../data/PersonaData.ts"/>
 ///<reference path="../data/SkillData.ts"/>
+///<reference path="../data/Translation.ts"/>
 /**
  * Created by Chin on 08-Apr-17.
  */
@@ -23,6 +24,25 @@ function isDlcPersonaOwned(dlcPersona) {
     if (!localStorage["dlcPersona"])
         return false;
     return JSON.parse(localStorage["dlcPersona"])[dlcPersona] === true;
+}
+function translateWord(originWord) {
+    if (originWord in translationMap) {
+        return translationMap[originWord];
+    }
+    return originWord;
+}
+function translatePersona(persona) {
+    var newPersona = angular.copy(persona);
+    newPersona.arcana = translateWord(persona.arcana);
+    return newPersona;
+}
+function translatePersonas(personas) {
+    var arr = [];
+    for (var _i = 0, personas_1 = personas; _i < personas_1.length; _i++) {
+        var persona = personas_1[_i];
+        arr.push(translatePersona(persona));
+    }
+    return arr;
 }
 /**
  * List of persona with DLC persona potentially removed based on user config

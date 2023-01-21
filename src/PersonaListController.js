@@ -6,6 +6,7 @@ var PersonaListController = /** @class */ (function () {
     function PersonaListController($scope) {
         this.$scope = $scope;
         $scope.fullPersonaList = fullPersonaList;
+        $scope.translatedPersonalList = translatePersonas(fullPersonaList);
         // set the default sort param
         $scope.sortBy = 'level';
         $scope.sortReverse = false;
