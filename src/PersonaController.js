@@ -11,7 +11,8 @@ var PersonaController = /** @class */ (function () {
         this.$scope = $scope;
         this.$scope.Math = Math;
         this.$scope.personaName = personaName;
-        this.$scope.persona = personaMap[personaName];
+        this.$scope.translatedPersonaName = translateWord(personaName);
+        this.$scope.persona = translatePersona(personaMap[personaName]);
         if (!this.$scope.persona)
             return;
         var calc = new FusionCalculator(customPersonaeByArcana);

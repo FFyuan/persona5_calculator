@@ -26,14 +26,14 @@ function isDlcPersonaOwned(dlcPersona) {
     return JSON.parse(localStorage["dlcPersona"])[dlcPersona] === true;
 }
 function translateWord(originWord) {
-    if (originWord in translationMap) {
+    if (originWord in translationMap && translationMap[originWord] != '') {
         return translationMap[originWord];
     }
     return originWord;
 }
 function translatePersona(persona) {
     var newPersona = angular.copy(persona);
-    newPersona.arcana = translateWord(persona.arcana);
+    newPersona.translatedArcana = translateWord(persona.arcana);
     newPersona.translatedName = translateWord(persona.name);
     return newPersona;
 }
@@ -83,6 +83,7 @@ var skillList = (function () {
         if (skillMap.hasOwnProperty(key)) {
             var skill = skillMap[key];
             skill.name = key;
+            skill.translatedName = translateWord(key);
             skill.elemDisplay = capitalizeFirstLetter(skill.element);
             skill.costDisplay = getSkillCost(skill);
             skill.personaDisplay = getSkillPersonaList(skill);
@@ -184,6 +185,7 @@ function getSkills(personaName) {
         var skillData = skillMap[sorted[i][0]];
         resSkills.push({
             name: sorted[i][0],
+            translatedName: skillData.translatedName,
             level: sorted[i][1],
             description: skillData.effect,
             unique: skillData.unique,
@@ -220,7 +222,8 @@ function getSkillPersonaList(skill) {
     return str;
 }
 function createPersonaLink(personaName) {
-    return "<a href='#/persona/" + personaName + "'>" + personaName + "</a>";
+    var translatedName = translateWord(personaName);
+    return "<a href='#/persona/" + personaName + "'>" + translatedName + "</a>";
 }
 function capitalizeFirstLetter(s) {
     return s.charAt(0).toUpperCase() + s.slice(1);

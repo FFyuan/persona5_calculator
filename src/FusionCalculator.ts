@@ -73,7 +73,7 @@ class FusionCalculator {
             let combo = special2Combos[x];
             if (((persona1.name === combo.sources[0] && persona2.name === combo.sources[1]) ||
                 (persona2.name === combo.sources[0] && persona1.name === combo.sources[1]))) {
-                return personaMap[combo.result];
+                return translatePersona(personaMap[combo.result]);
             }
         }
 
@@ -179,10 +179,10 @@ class FusionCalculator {
             if (persona.name === combo.result) {
                 let recipe = {
                     sources: [],
-                    result: personaMap[combo.result]
+                    result: translatePersona(personaMap[combo.result])
                 };
                 for (let j = 0; j < combo.sources.length ; j++) {
-                    recipe.sources.push(personaMap[combo.sources[j]]);
+                    recipe.sources.push(translatePersona(personaMap[combo.sources[j]]));
                 }
                 this.addRecipe(recipe, allRecipe, true);
                 return allRecipe;
@@ -257,8 +257,8 @@ class FusionCalculator {
                     let result = this.fuseNormal(persona1, persona2);
                     if (!result) continue;
                     recipes.push({
-                        sources: [persona1, persona2],
-                        result: result
+                        sources: [translatePersona(persona1), translatePersona(persona2)],
+                        result: translatePersona(result)
                     });
                 }
             }
@@ -266,7 +266,7 @@ class FusionCalculator {
 
         // rare fusion where one persona is a rare one and the other is a normal one
         for (let i = 0; i < rarePersonae.length; i++) {
-            let rarePersona = personaMap[rarePersonae[i]];
+            let rarePersona = translatePersona(personaMap[rarePersonae[i]]);
             let personae = this.personaeByArcana[arcana];
             for (let j = 0; j < personae.length; j++) {
                 let mainPersona = personae[j];

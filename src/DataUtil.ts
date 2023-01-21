@@ -30,7 +30,7 @@ function isDlcPersonaOwned(dlcPersona: string): boolean {
 }
 
 function translateWord(originWord: string) {
-    if (originWord in translationMap) {
+    if (originWord in translationMap && translationMap[originWord] != '') {
         return translationMap[originWord];
     }
     return originWord;
@@ -38,7 +38,7 @@ function translateWord(originWord: string) {
 
 function translatePersona(persona: PersonaData) : PersonaData {
     let newPersona = angular.copy(persona);
-    newPersona.arcana = translateWord(persona.arcana);
+    newPersona.translatedArcana = translateWord(persona.arcana);
     newPersona.translatedName = translateWord(persona.name);
     return newPersona;
 }
@@ -91,6 +91,7 @@ const skillList: SkillData[] = (() =>{
         if (skillMap.hasOwnProperty(key)) {
             let skill = skillMap[key];
             skill.name = key;
+            skill.translatedName = translateWord(key);
             skill.elemDisplay = capitalizeFirstLetter(skill.element);
             skill.costDisplay = getSkillCost(skill);
             skill.personaDisplay = getSkillPersonaList(skill);
@@ -197,6 +198,7 @@ function getSkills(personaName: string) {
         let skillData = skillMap[sorted[i][0]];
         resSkills.push({
             name: sorted[i][0],
+            translatedName: skillData.translatedName,
             level: sorted[i][1],
             description: skillData.effect,
             unique: skillData.unique,
@@ -237,7 +239,8 @@ function getSkillPersonaList(skill: SkillData): string {
 }
 
 function createPersonaLink(personaName: string): string {
-    return `<a href='#/persona/${personaName}'>${personaName}</a>`;
+    var translatedName = translateWord(personaName);
+    return `<a href='#/persona/${personaName}'>${translatedName}</a>`;
 }
 
 function capitalizeFirstLetter(s: string) {

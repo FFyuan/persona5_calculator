@@ -8,6 +8,7 @@ interface PersonaData {
     name?: string; // only for when converted to list
     translatedName?: string;
     arcana: string;
+    translatedArcana?: string;
     level: number;
     stats: number[];
     elems: string[];

@@ -63,7 +63,7 @@ var FusionCalculator = /** @class */ (function () {
             var combo = special2Combos[x];
             if (((persona1.name === combo.sources[0] && persona2.name === combo.sources[1]) ||
                 (persona2.name === combo.sources[0] && persona1.name === combo.sources[1]))) {
-                return personaMap[combo.result];
+                return translatePersona(personaMap[combo.result]);
             }
         }
         return null;
@@ -162,10 +162,10 @@ var FusionCalculator = /** @class */ (function () {
             if (persona.name === combo.result) {
                 var recipe = {
                     sources: [],
-                    result: personaMap[combo.result]
+                    result: translatePersona(personaMap[combo.result])
                 };
                 for (var j = 0; j < combo.sources.length; j++) {
-                    recipe.sources.push(personaMap[combo.sources[j]]);
+                    recipe.sources.push(translatePersona(personaMap[combo.sources[j]]));
                 }
                 this.addRecipe(recipe, allRecipe, true);
                 return allRecipe;
@@ -238,15 +238,15 @@ var FusionCalculator = /** @class */ (function () {
                     if (!result)
                         continue;
                     recipes.push({
-                        sources: [persona1, persona2],
-                        result: result
+                        sources: [translatePersona(persona1), translatePersona(persona2)],
+                        result: translatePersona(result)
                     });
                 }
             }
         }
         // rare fusion where one persona is a rare one and the other is a normal one
         for (var i = 0; i < rarePersonae.length; i++) {
-            var rarePersona = personaMap[rarePersonae[i]];
+            var rarePersona = translatePersona(personaMap[rarePersonae[i]]);
             var personae = this.personaeByArcana[arcana];
             for (var j = 0; j < personae.length; j++) {
                 var mainPersona = personae[j];

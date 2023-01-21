@@ -6,6 +6,7 @@ interface SkillMap {
 
 interface SkillData {
     name?: string;
+    translatedName?: string;
     cost?: number;
     effect: string;
     element: "phys" | "gun" | "fire" | "ice" | "electric" | "wind" | "psy" | "nuclear" | "bless" | "curse" |

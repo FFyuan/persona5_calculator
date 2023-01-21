@@ -21,7 +21,7 @@
     <tbody>
     <tr ng:repeat="skill in skillList | orderBy:sortBy:sortReverse | filter:filterStr">
         <td class="mobile-hidden">{{skill.elemDisplay}}</td>
-        <td class="left-border" id="{{skill.name}}">{{skill.name}}
+        <td class="left-border" id="{{skill.name}}">{{skill.translatedName}}
             <span class="dlc-label" ng-if="skill.unique">Unique</span>
         </td>
         <td class="mobile-hidden left-border" >{{skill.costDisplay}}</td>
